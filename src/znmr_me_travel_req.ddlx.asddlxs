@@ -1,0 +1,102 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo:{ typeName:'Travel',
+typeNamePlural:'Travels',
+title: { value: 'TravelId' },
+description: { value: 'Description'}
+}
+
+annotate entity ZNMR_TRAVEL_REQUESTOR
+    with 
+{
+   
+   @UI.facet: [{  purpose:#HEADER, 
+                  type:#DATAPOINT_REFERENCE,
+                  label: 'Travel Price',
+                  position: 10,     //Position in the header
+                  targetQualifier: 'PRICE_DATA'  },
+               { purpose: #HEADER, 
+                  type:#DATAPOINT_REFERENCE,        
+                  label: 'Status@',
+                  position: 20,     //Position in the header  
+                  targetQualifier: 'STATUS' },
+                
+                
+                { purpose: #STANDARD, 
+                  type:#COLLECTION,
+                  label: 'Additional Details',
+                  position: 10,
+                  id: 'COLLECTION'},
+
+                { purpose: #STANDARD, 
+                  type:#IDENTIFICATION_REFERENCE,
+                  parentId: 'COLLECTION',
+                  position: 10,
+                  targetQualifier: 'ID1'}, 
+                  
+                { purpose: #STANDARD, 
+                  type:#FIELDGROUP_REFERENCE,
+                  parentId: 'COLLECTION',
+                  position: 20,
+                  targetQualifier: 'FG1'},
+
+                { purpose: #STANDARD, 
+                  type:#FIELDGROUP_REFERENCE,
+                parentId: 'COLLECTION',
+                position: 30,
+                targetQualifier: 'FG2'} , 
+                
+                { purpose: #STANDARD,
+                  type: #LINEITEM_REFERENCE,
+                  label: 'Bookings',
+                  position: 20,
+                  targetElement: '_booking' 
+                
+                }
+                                                                 
+                   ]
+
+
+ @UI.selectionField: [{ position:10  }]
+ @UI.lineItem: [{ position:10 }, { type:#FOR_ACTION, label:'Copy', dataAction:'copytravelrequest' } ] 
+ @UI.identification: [{ qualifier: 'ID1' }]
+    TravelId;
+//    Description;
+ @UI.selectionField: [{ position:20  }]
+ @UI.lineItem: [{ position:20  }]
+ @UI.fieldGroup: [{ label: 'Agency Id',  qualifier: 'FG1',position: 10 }]   
+    AgencyId;
+//    AgencyName;
+@UI.selectionField: [{ position:30  }]
+@UI.lineItem: [{ position:30, label:'Trip Start Date' }]
+@UI.fieldGroup: [{ label: 'Trip Start Date',  qualifier: 'FG1',position: 20 }]       
+    TripStartDate;
+@UI.lineItem: [{ position:40, label:'Trip End Date' }]    
+@UI.fieldGroup: [{ label: 'Trip End Date',  qualifier: 'FG1', position: 30 }]   
+    TripEndDate;
+@UI.lineItem: [{ position:41  }] @UI.identification: [{ qualifier: 'ID1' }]
+    CreatedBy;    
+@UI.lineItem: [{ position:50, criticality:'Criticality', importance: #HIGH }]  
+@UI.dataPoint: { qualifier:'STATUS', criticality: 'Criticality',title: 'Trip Approval Status@' } 
+//@UI.fieldGroup: [{ label: '@Trip Approval Status@', criticality: 'Criticality', qualifier: 'STATUS'  }]  
+    RequestStatus;
+@UI.lineItem: [{ position:60, importance: #HIGH }]
+    CO2Tax;
+@UI.lineItem: [{ position:70, importance: #HIGH }]
+    DayofTravel;    
+//@UI.lineItem: [{ position:60 }]    
+//    Criticality;    
+@UI.fieldGroup: [{ label: 'Amount',  qualifier: 'FG2',position: 10 }]   
+@UI.dataPoint: { qualifier:'PRICE_DATA', title: 'Trip Cost' }  //
+    Price;
+    
+//@UI.fieldGroup: [{ label: 'Currency', qualifier: 'FG2', position: 20 }]    
+//   Currency;
+   
+@UI.fieldGroup: [{ label: 'Booking Fee', qualifier: 'FG2', position: 30 }]    
+   BookingFee;          
+    
+@UI.fieldGroup: [{ label: 'Customer',  qualifier: 'FG1', position: 10 }]    
+   Customer;
+ 
+}

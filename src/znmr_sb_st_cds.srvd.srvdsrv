@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Standard CDS'
+define service ZNMR_SB_ST_CDS {
+  expose I_Currency;
+}

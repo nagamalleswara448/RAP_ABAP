@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def.for Travel Request Approver'
+define service ZNMR_SD_APPROVER {
+  expose ZNMR_TRAVEL_APPROVER;
+  expose ZNMR_BOOKING_APPROVER;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition'
+define service ZNMR_SD_TRAVEL {
+  expose ZNMR_TRAVEL_REQUESTOR;
+  expose ZNMR_Booking_REQUESTOR;
+}

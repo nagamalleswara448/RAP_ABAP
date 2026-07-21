@@ -1,0 +1,54 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo:{ typeName:'Booking',
+typeNamePlural:'Bookings',
+title: { value: 'BookingId' },
+description: { value: 'bookingstat'}
+}
+
+annotate entity ZNMR_Booking_REQUESTOR with
+{
+
+@UI.facet: [{ purpose: #STANDARD,
+              type: #COLLECTION,
+              id: 'BOOKINGDET',
+              position: 10  },
+              
+            { purpose: #STANDARD, 
+              type: #IDENTIFICATION_REFERENCE,
+              parentId: 'BOOKINGDET', 
+              position: 10,
+              targetQualifier: 'FLIGHT'}                
+              ]
+
+  @UI.lineItem: [{ label: 'Travel Id', position: 10 }, 
+                 {type:#FOR_ACTION, label:'Calculate Total Price', dataAction: 'calculatetotalprice' }]
+  TravelId;
+  @UI.lineItem: [{ label: 'Booking Id', position: 20 }]
+  BookingId;
+  @UI.lineItem: [{ label: 'Booking Status', position: 30 }]
+//  @UI.fieldGroup: [{ qualifier: 'FLIGHT', label: 'Booking Status'}]
+ @UI.identification: [{ qualifier: 'FLIGHT', label: 'Booking Status' }]
+  BookingStatus;
+  @UI.lineItem: [{ label: 'Carrier Id', position: 40 }]
+//  @UI.fieldGroup: [{ qualifier: 'FLIGHT', label: 'Airlines'}]
+@UI.identification: [{ qualifier: 'FLIGHT', label: 'Airlines'  }]
+  CarrierId;
+
+  @UI.lineItem: [{ label: 'Flight Date', position: 60 }]
+//  @UI.fieldGroup: [{ qualifier: 'FLIGHT', label: 'Flight Date'}]
+ @UI.identification: [{ qualifier: 'FLIGHT', label: 'Flight Date' }]
+  flight_date;
+
+  @UI.lineItem: [{ label: 'Flight Fare', position: 50 }]
+//  @UI.fieldGroup: [{ qualifier: 'FLIGHT', label: 'Booking Price'}]
+  @UI.identification: [{ qualifier: 'FLIGHT', label: 'Booking Price' }]
+  Price;
+  @UI.lineItem: [{ label: 'Currency', position: 51 }]
+  @UI.identification: [{ qualifier: 'FLIGHT', label: 'Currency' }]
+  Currency;  
+  
+  @UI.lineItem: [{ hidden: true  }]
+  bookingstat;
+
+}
